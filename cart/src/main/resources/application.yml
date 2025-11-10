@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cart-service
+
+  profiles:
+    # ???????????? dev / prod / test ?
+    active: dev
+

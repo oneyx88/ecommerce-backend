@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    app: user
+    app.kubernetes.io/name: user
+    app.kubernetes.io/part-of: ecommerce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+        app.kubernetes.io/name: user
+        app.kubernetes.io/part-of: ecommerce
+    spec:
+      hostAliases:
+        - ip: "10.101.92.232"
+          hostnames:
+            - "keycloak.local"
+      containers:
+        - name: user
+          image: yixiwan/user-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Djavax.net.ssl.trustStore=/etc/ssl/truststore/keycloak-local-truststore.jks -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=JKS"
+            - name: SPRING_CONFIG_LOCATION
+              value: /config/application-k8s.yml
+          envFrom:
+            - configMapRef:
+                name: user-config
+            - secretRef:
+                name: user-secret
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            - name: truststore-volume
+              mountPath: /etc/ssl/truststore
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 2
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: config-volume
+          configMap:
+            name: user-config
+        - name: truststore-volume
+          secret:
+            secretName: gateway-truststore
+

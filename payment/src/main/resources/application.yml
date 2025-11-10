@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: payment-service
+
+  profiles:
+    # ???????????? dev / prod / test ?
+    active: dev

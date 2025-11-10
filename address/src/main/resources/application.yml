@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: address-service
+
+  profiles:
+    # ???????????? dev / prod / test ?
+    active: dev
+
+

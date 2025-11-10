@@ -1,0 +1,243 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+        - TokenRelay
+      routes:
+        # 1️⃣ user-service
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/users(?<segment>/.+)?"
+                replacement: "/api/v1/users${segment}"
+            - name: CircuitBreaker
+              args:
+                name: userCircuit
+                fallbackUri: forward:/fallback/users
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                methods: GET, POST, PUT, DELETE
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+
+        # 2️⃣ order-service
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/orders/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/orders(?<segment>/.+)?"
+                replacement: "/api/v1/orders${segment}"
+            - name: CircuitBreaker
+              args:
+                name: orderCircuit
+                fallbackUri: forward:/fallback/orders
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+
+        # 3️⃣ product-service
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/products/**, /categories/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/(?<resource>products|categories)(?<segment>/.+)?"
+                replacement: "/api/v1/${resource}${segment}"
+            - name: CircuitBreaker
+              args:
+                name: productCircuit
+                fallbackUri: forward:/fallback/products
+            - name: Retry
+              args:
+                retries: 2
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
+
+        # 4️⃣ inventory-service
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventories/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/inventories(?<segment>/.+)?"
+                replacement: "/api/v1/inventories${segment}"
+            - name: CircuitBreaker
+              args:
+                name: inventoryCircuit
+                fallbackUri: forward:/fallback/inventories
+
+        # 5️⃣ payment-service
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/payments/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/payments(?<segment>/.+)?"
+                replacement: "/api/v1/payments${segment}"
+            - name: CircuitBreaker
+              args:
+                name: paymentCircuit
+                fallbackUri: forward:/fallback/payments
+
+        # 6️⃣ cart-service
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/carts/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/carts(?<segment>/.+)?"
+                replacement: "/api/v1/carts${segment}"
+            - name: CircuitBreaker
+              args:
+                name: cartCircuit
+                fallbackUri: forward:/fallback/carts
+
+        # 7️⃣ address-service
+        - id: address-service
+          uri: lb://address-service
+          predicates:
+            - Path=/addresses/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "^/addresses(?<segment>/.+)?"
+                replacement: "/api/v1/addresses${segment}"
+            - name: CircuitBreaker
+              args:
+                name: addressCircuit
+                fallbackUri: forward:/fallback/addresses
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 30s
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins:
+#              - ${ALLOWED_ORIGINS:http://localhost:3000}
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#              - OPTIONS
+#            allowedHeaders:
+#              - '*'
+#            allowCredentials: true
+
+  data:
+    redis:
+      host: ecommerce-redis-hpzzdp.serverless.use1.cache.amazonaws.com
+      port: 6379
+      ssl:
+        enabled: true
+
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            # 显式配置授权与令牌端点分离：浏览器用 localhost，服务端用容器内地址
+            authorization-uri: ${KEYCLOAK_AUTH_URL}
+            token-uri: ${KEYCLOAK_TOKEN_URI}
+            user-info-uri: ${KEYCLOAK_USERINFO_URI:http://keycloak:8080/realms/ecomm-app/protocol/openid-connect/userinfo}
+            jwk-set-uri: ${KEYCLOAK_JWK_SET_URI}
+        registration:
+          keycloak:
+            client-id: ecomm-oauth2
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+      orderCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+      productCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+      inventoryCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+      paymentCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+      cartCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+      addressCircuit:
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 5s
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.netty.http.client: DEBUG
+
