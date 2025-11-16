@@ -13,13 +13,13 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - redis.local
-        - keycloak.local
         - api.local
+        - keycloak.local
+        - redis.local
       secretName: ecommerce-tls
 
   rules:
-    # --- Keycloak 认证中心（本地域名） ---
+    # --- Keycloak 认证中心 ---
     - host: keycloak.local
       http:
         paths:
@@ -43,7 +43,7 @@ spec:
                 port:
                   number: 5540
 
-    # --- API 网关（本地域名） ---
+    # --- API 网关 / 微服务接口 ---
     - host: api.local
       http:
         paths:

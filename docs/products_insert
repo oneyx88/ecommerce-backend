@@ -1,0 +1,36 @@
+INSERT INTO categories (category_name, description)
+VALUES ('Electronics', 'Devices and gadgets including smartphones, laptops, and accessories.');
+
+INSERT INTO categories (category_name, description)
+VALUES ('Home Decor', 'Decorative items for enhancing home ambiance.');
+
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Wireless Mouse', 'Ergonomic design with 2.4GHz wireless connectivity', 19.99, 5.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Gaming Keyboard', 'RGB mechanical keyboard with blue switches', 49.99, 10.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Bluetooth Speaker', 'Portable speaker with deep bass and 12h battery life', 29.99, 8.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('USB-C Hub', '7-in-1 multiport adapter with 4K HDMI and SD card reader', 24.99, 0.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Smart LED Bulb', 'WiFi-enabled bulb with 16 million color options', 13.99, 3.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Noise Cancelling Headphones', 'Over-ear wireless headphones with ANC', 89.99, 15.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('4K Monitor', '27-inch UHD display with HDR support', 299.99, 20.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Portable SSD', '1TB NVMe SSD with Type-C port', 119.99, 12.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Wireless Charger', 'Fast charging pad for Qi-enabled devices', 17.99, 4.0);
+
+INSERT INTO products (product_name, description, price, discount)
+VALUES ('Action Camera', '4K recording with waterproof case included', 79.99, 10.0);
