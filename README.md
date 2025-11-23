@@ -157,16 +157,6 @@
 ## Observability and Health
 - All services enable Actuator (e.g., `/actuator/health`) for liveness/readiness and basic monitoring.
 
-## FAQ
-- Port or route mismatches?
-  - Rely on service `application.yml`/`application-dev.yml` and `docker-compose.yml` for authoritative values.
-- Keycloak token issues?
-  - Verify `issuer`/`JWK Set URI`/`token`/`auth` endpoints, client credentials, and clock synchronization.
-- Stripe webhook verification fails?
-  - Confirm `STRIPE_WEBHOOK_SECRET` and the presence of Stripe signature headers; for local dev, ensure external reachability.
-- Kafka connectivity errors?
-  - Local uses `PLAINTEXT`; cloud/managed MSK requires IAM and proper credentials/dependencies.
-
 
 ## Associated Frontend Repository
 - GitHub: https://github.com/oneyx88/ecommerce-frontend
