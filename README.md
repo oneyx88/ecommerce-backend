@@ -4,10 +4,6 @@
 
 ![Demo](./demo.gif)
 
-## Project Demo (Placeholder)
-- Demo video/screenshots: To be added
-- Online preview: To be added
-- Demo accounts and roles: To be added
 
 ---
 
