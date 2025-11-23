@@ -90,17 +90,11 @@
 - JDK `21`
 - Maven `3.9+`
 - Docker and Docker Compose
-
-## Required Environment Variables
-
-Before running the services, make sure you have created a `.env` file or configured environment variables with the following keys:
-
-```bash
-STRIPE_SECRET_KEY=<your_stripe_test_or_live_secret_key>
-STRIPE_WEBHOOK_SECRET=<your_stripe_webhook_secret>
+- STRIPE_SECRET_KEY=<your_stripe_test_or_live_secret_key>
+- STRIPE_WEBHOOK_SECRET=<your_stripe_webhook_secret>
 
 
-## Local Quick Start (excluding Kubernetes)
+## Local Quick Start
 1) Start infrastructure (from repo root)
    - `docker compose up -d`
    - Or start selectively: MySQL, Redis, Kafka/Zookeeper, Keycloak (refer to ports/configs in `docker-compose.yml`).
