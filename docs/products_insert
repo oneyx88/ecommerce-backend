@@ -1,0 +1,40 @@
+USE ecommerce;
+INSERT INTO categories (category_id, category_name, description)
+VALUES
+(1, 'Electronics', 'Electronic devices and accessories'),
+(2, 'Home Appliances', 'Appliances for household use');
+
+
+INSERT INTO products (
+  product_id, product_name, description, image,
+  price, discount, special_price, category_id, seller_id
+) VALUES
+(1, 'Wireless Headphones', 'Bluetooth noise-cancelling headphones',
+ 'https://placehold.co/600x400', 120.00, 0.15, 102.00, 1, 501),
+
+(2, 'Bluetooth Speaker', 'Portable waterproof speaker',
+ 'https://placehold.co/600x400', 75.00, 0.10, 67.50, 1, 502),
+
+(3, 'Mechanical Keyboard', 'RGB mechanical keyboard with blue switches',
+ 'https://placehold.co/600x400', 85.00, NULL, NULL, 1, 503),
+
+(4, 'Gaming Mouse', 'Ergonomic gaming mouse with RGB lighting',
+ 'https://placehold.co/600x400', 50.00, NULL, NULL, 1, 504),
+
+(5, 'Smartwatch', 'Fitness tracking smartwatch with heart rate monitor',
+ 'https://placehold.co/600x400', 150.00, 0.20, 120.00, 1, 505),
+
+(6, 'Air Fryer', 'Oil-free air fryer with temperature control',
+ 'https://placehold.co/600x400', 99.99, 0.25, 74.99, 2, 506),
+
+(7, 'Robot Vacuum Cleaner', 'Self-charging smart vacuum cleaner',
+ 'https://placehold.co/600x400', 299.99, NULL, NULL, 2, 507),
+
+(8, 'Electric Kettle', 'Stainless steel fast boil kettle',
+ 'https://placehold.co/600x400', 45.00, 0.10, 40.50, 2, 508),
+
+(9, 'Air Purifier', 'HEPA filter air purifier for home',
+ 'https://placehold.co/600x400', 120.00, NULL, NULL, 2, 509),
+
+(10, 'Electric Heater', 'Portable electric space heater',
+ 'https://placehold.co/600x400', 65.00, NULL, NULL, 2, 510);

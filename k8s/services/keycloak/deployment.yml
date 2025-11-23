@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:26.0.2
+          args:
+            - "start-dev"
+            - "--http-port=8080"
+            - "--hostname-strict=false"
+            - "--import-realm"
+            - "--http-enabled=true"
+            - "--hostname=https://keycloak.local"
+            - "--hostname-admin=https://keycloak.local"
+            - "--proxy-headers=xforwarded"
+          env:
+            - name: KC_MIGRATION_STRATEGY
+              value: OVERWRITE_EXISTING
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "admin"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: keycloak-storage
+              mountPath: /opt/keycloak/data
+            - name: keycloak-realm
+              mountPath: /opt/keycloak/data/import
+              readOnly: true
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 6
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 2
+      volumes:
+        - name: keycloak-storage
+          persistentVolumeClaim:
+            claimName: keycloak-pvc
+        - name: keycloak-realm
+          configMap:
+            name: keycloak-realm
+

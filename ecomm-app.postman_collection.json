@@ -1,0 +1,3623 @@
+{
+	"info": {
+		"_postman_id": "e6b7c618-87d4-4a5b-8dcb-93f4cc64b6bc",
+		"name": "ecomm-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49156737",
+		"_collection_link": "https://wanyixi630-2052200.postman.co/workspace/Yixi's-Workspace~18efcb5c-4fbc-4536-8e81-c3df57e033ff/collection/49156737-e6b7c618-87d4-4a5b-8dcb-93f4cc64b6bc?action=share&source=collection_link&creator=49156737"
+	},
+	"item": [
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "create category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryName\": \"Electronics\",\n  \"description\": \"Electronic devices and accessories including phones, tablets, and gadgets.\",\n  \"image\": \"https://example.com/images/electronics.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all categories",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories?pageNumber=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "categoryName",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "Desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryName\": \"Electronics Updated\",\n  \"description\": \"Electronic devices and accessories including phones, tablets, and gadgets.\",\n  \"image\": \"https://example.com/images/electronics.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productName\": \"Wireless Mouse\",\n  \"description\": \"Ergonomic 2.4GHz wireless mouse with adjustable DPI and silent clicks.\",\n  \"price\": 19.99,\n  \"discount\": 0.15\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "WireLess",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "Electronics",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products By Category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products By Keyword",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/keyword/iphone",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"keyword",
+								"iphone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productName\": \"Wireless Mouse Updated\",\n  \"description\": \"Ergonomic 2.4GHz wireless mouse with adjustable DPI and silent clicks.\",\n  \"price\": 19.99,\n  \"discount\": 0.15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productName\": \"Wireless Mouse Updated\",\n  \"description\": \"Ergonomic 2.4GHz wireless mouse with adjustable DPI and silent clicks.\",\n  \"quantity\": 150,\n  \"image\": \"https://example.com/images/wireless_mouse.jpg\",\n  \"price\": 19.99,\n  \"discount\": 0.15\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/121",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"121"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1f0b9f62-a9de-4690-ac15-8921f30dc879"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/1/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"1",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Image",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/images/25603831-914d-4edf-8bb2-0a747731b681-images.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"images",
+								"25603831-914d-4edf-8bb2-0a747731b681-images.jpeg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hot Products",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/hot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"hot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Hot Product",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/hot/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"hot",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products By Seller",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/sellers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"sellers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"john_doe\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"P@ssw0rd123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Info",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "824f1cad-e9ae-4774-b093-8c46d0a29b98",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-Username",
+								"value": "john_doe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-Email",
+								"value": "john.doe@example.com",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"sgywan6\",\n  \"password\": \"Xhlwxy7241260!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/f0564184-eb42-4f62-a23c-7b3c6d21df7a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"f0564184-eb42-4f62-a23c-7b3c6d21df7a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Seller",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"john_doe\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"P@ssw0rd123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/signup/sellers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"signup",
+								"sellers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sellers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/sellers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"sellers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add Product to Cart",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "user1",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "49e07d0c-704d-4207-8bc2-996ca7b11e0a",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/carts/products/1/quantity/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carts",
+								"products",
+								"1",
+								"quantity",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart By Id",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "tokenName",
+									"value": "user1",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "49e07d0c-704d-4207-8bc2-996ca7b11e0a",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/carts/users/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carts",
+								"users",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "2115572a-bfbf-40b3-b86b-9d79e9dc4570",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/carts/products/1/quantity/decrease",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carts",
+								"products",
+								"1",
+								"quantity",
+								"decrease"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://127.0.0.1:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://127.0.0.1:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "8c066eab-ed01-4ceb-9f50-0cb72459b9f9",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/carts/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carts",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "tokenName",
+									"value": "user1",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/carts/users/869e6e7b-e1f6-440a-a24c-ae572a3cf45f/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"carts",
+								"users",
+								"869e6e7b-e1f6-440a-a24c-ae572a3cf45f",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Create Address",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://127.0.0.1:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://127.0.0.1:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"street\": \"1835 Hinman Avenue, Apt 203\",\n  \"city\": \"Evanston\",\n  \"state\": \"Illinois\",\n  \"country\": \"United States\",\n  \"zipCode\": \"60201\",\n  \"label\": \"Home\",\n  \"isDefault\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/addresses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Addresses",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/addresses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8084/api/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address By User",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/addresses/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"addresses",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"street\": \"1835 Hinman Avenue, Apt 203 Updated\",\n  \"city\": \"Evanston\",\n  \"state\": \"Illinois\",\n  \"country\": \"United States\",\n  \"zipCode\": \"60201\",\n  \"label\": \"Home\",\n  \"isDefault\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://keycloak:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "inventory",
+			"item": [
+				{
+					"name": "Get All Inventory",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inventories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create inventory",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"availableStock\": 100,\n  \"lockedStock\": 0,\n  \"soldStock\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventories/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventories",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get inventory By ProductId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inventories/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventories",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update inventory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"availableStock\": 80,\n  \"lockedStock\": 10,\n  \"soldStock\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/inventory/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"inventory",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Inventory",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://127.0.0.1:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://127.0.0.1:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "admin1",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/inventories/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"inventories",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lock Inventory",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "tokenName",
+									"value": "user1",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\": 1,\n  \"quantity\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/inventories/lock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"inventories",
+								"lock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Inventory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\": 1,\n  \"quantity\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/inventory/confirm?productId=1&quantity=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"inventory",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "1"
+								},
+								{
+									"key": "quantity",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Release Inventory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\": 1,\n  \"quantity\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/inventory/release?productId=1&quantity=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"inventory",
+								"release"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "1"
+								},
+								{
+									"key": "quantity",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Inventory By Seller",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inventories/seller",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventories",
+								"seller"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inventory By Seller",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"availableStock\": 100,\n  \"lockedStock\": 0,\n  \"soldStock\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventories/seller/121",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventories",
+								"seller",
+								"121"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "49e07d0c-704d-4207-8bc2-996ca7b11e0a",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-User-Email",
+								"value": "john.doe@example.com",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addressId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/1/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders By Seller",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/seller",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"seller"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"orderId\": 1001,\n  \"keycloakId\": \"f82a3c7b-91e4-4d8a-92ab-8f5a68c12e8d\",\n  \"amount\": 199.99,\n  \"currency\": \"USD\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8087/api/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment By PaymentId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "user1",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8087/api/v1/payments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payment By PaymentId",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "0suFzByDwD8crmhf7oi8x4U1z52UaCCG",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "user1",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "ecomm-oauth2",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "*",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8087/api/v1/payments/1/status?status=SUCCESS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"1",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "SUCCESS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Stripe Client Secret",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000,\n    \"currency\" : \"usd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments/stripe-client-secret",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"stripe-client-secret"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "category Copy",
+					"item": [
+						{
+							"name": "create category",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "ecomm-oauth2",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "*",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid profile email roles",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"categoryName\": \"Electronics\",\n  \"description\": \"Electronic devices and accessories including phones, tablets, and gadgets.\",\n  \"image\": \"https://example.com/images/electronics.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all categories",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "tokenName",
+											"value": "user1",
+											"type": "string"
+										},
+										{
+											"key": "clientSecret",
+											"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "ecomm-oauth2",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "*",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid profile email roles",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/public/categories?pageNumber=0&pageSize=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"public",
+										"categories"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "sortBy",
+											"value": "categoryName",
+											"disabled": true
+										},
+										{
+											"key": "sortOrder",
+											"value": "Desc",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"categoryName\": \"Electronics Updated\",\n  \"description\": \"Electronic devices and accessories including phones, tablets, and gadgets.\",\n  \"image\": \"https://example.com/images/electronics.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/category/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete category",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "user1",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "ecomm-oauth2",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "*",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid profile email roles",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/category/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product Copy",
+					"item": [
+						{
+							"name": "Add Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productName\": \"Wireless Mouse\",\n  \"description\": \"Ergonomic 2.4GHz wireless mouse with adjustable DPI and silent clicks.\",\n  \"quantity\": 150,\n  \"image\": \"https://example.com/images/wireless_mouse.jpg\",\n  \"price\": 19.99,\n  \"discount\": 0.15\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/categories/1/product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"categories",
+										"1",
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Products",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/public/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"public",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Products By Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/public/categories/1/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"public",
+										"categories",
+										"1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Products By Keyword",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/public/products/keyword/m",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"public",
+										"products",
+										"keyword",
+										"m"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productName\": \"Wireless Mouse Updated\",\n  \"description\": \"Ergonomic 2.4GHz wireless mouse with adjustable DPI and silent clicks.\",\n  \"quantity\": 150,\n  \"image\": \"https://example.com/images/wireless_mouse.jpg\",\n  \"price\": 19.99,\n  \"discount\": 0.15\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productName\": \"Wireless Mouse Updated\",\n  \"description\": \"Ergonomic 2.4GHz wireless mouse with adjustable DPI and silent clicks.\",\n  \"quantity\": 150,\n  \"image\": \"https://example.com/images/wireless_mouse.jpg\",\n  \"price\": 19.99,\n  \"discount\": 0.15\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Image",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Get Product By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/api/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User Copy",
+					"item": [
+						{
+							"name": "Create User",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "user1",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "ecomm-oauth2",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "*",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid profile email roles",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"john_doe\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"P@ssw0rd123!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/signup/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"signup",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Info",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "dtvLJNYpNolhKQWX6YmiRJ0oJYEk91iR",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "user1",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/auth",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "ecomm-oauth2",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:8443/realms/ecomm-app/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "*",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid profile email roles",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "824f1cad-e9ae-4774-b093-8c46d0a29b98",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Username",
+										"value": "john_doe",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Email",
+										"value": "john.doe@example.com",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart Copy",
+					"item": [
+						{
+							"name": "Add Product to Cart",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "8c066eab-ed01-4ceb-9f50-0cb72459b9f9",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8083/api/carts/products/1/quantity/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"api",
+										"carts",
+										"products",
+										"1",
+										"quantity",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cart By Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "2115572a-bfbf-40b3-b86b-9d79e9dc4570",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8083/api/carts/users/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"api",
+										"carts",
+										"users",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "2115572a-bfbf-40b3-b86b-9d79e9dc4570",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8083/api/cart/products/1/quantity/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"api",
+										"cart",
+										"products",
+										"1",
+										"quantity",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "8c066eab-ed01-4ceb-9f50-0cb72459b9f9",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8083/api/cart/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"api",
+										"cart",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Address Copy",
+					"item": [
+						{
+							"name": "Create Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8084/api/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"api",
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Addresses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8084/api/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"api",
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Address By Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8084/api/addresses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"api",
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Address By User",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Update Address",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"street\": \"1835 Hinman Avenue, Apt 203 Updated\",\n  \"city\": \"Evanston\",\n  \"state\": \"Illinois\",\n  \"country\": \"United States\",\n  \"zipCode\": \"60201\",\n  \"label\": \"Home\",\n  \"isDefault\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8084/api/addresses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"api",
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Address",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "b283fc7a-d620-4f4a-b805-1db7fa5cc0b1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"street\": \"1835 Hinman Avenue, Apt 203 Updated\",\n  \"city\": \"Evanston\",\n  \"state\": \"Illinois\",\n  \"country\": \"United States\",\n  \"zipCode\": \"60201\",\n  \"label\": \"Home\",\n  \"isDefault\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8084/api/addresses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"api",
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "inventory Copy",
+					"item": [
+						{
+							"name": "Get All Inventory",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Create inventory",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"availableStock\": 100,\n  \"lockedStock\": 0,\n  \"soldStock\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get inventory By ProductId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update inventory",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"availableStock\": 80,\n  \"lockedStock\": 10,\n  \"soldStock\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Inventory",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lock Inventory",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productId\": 1,\n  \"quantity\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/lock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"lock"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm Inventory",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productId\": 1,\n  \"quantity\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/lock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"lock"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Release Inventory",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productId\": 1,\n  \"quantity\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/inventory/lock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"inventory",
+										"lock"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order Copy",
+					"item": [
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-User-Id",
+										"value": "ef76b604-2a0e-4fb7-9ce0-56131d739767",
+										"type": "text"
+									},
+									{
+										"key": "X-User-Email",
+										"value": "john.doe@example.com",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8085/api/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8085",
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payment Copy",
+					"item": [
+						{
+							"name": "Create Payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"orderId\": 1001,\n  \"keycloakId\": \"f82a3c7b-91e4-4d8a-92ab-8f5a68c12e8d\",\n  \"amount\": 199.99,\n  \"currency\": \"USD\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8087/api/payments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8087",
+									"path": [
+										"api",
+										"payments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Payment By PaymentId",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8087/api/payments/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8087",
+									"path": [
+										"api",
+										"payments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Payment By PaymentId",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8087/api/payments/1/status?status=SUCCESS",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8087",
+									"path": [
+										"api",
+										"payments",
+										"1",
+										"status"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "SUCCESS"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

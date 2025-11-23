@@ -1,0 +1,24 @@
+USE ecommerce;
+INSERT INTO users (
+    deleted,
+    enabled,
+    created_at,
+    updated_at,
+    user_id,
+    username,
+    email,
+    first_name,
+    last_name,
+    keycloak_id
+) VALUES (
+    0,                          -- deleted (false)
+    1,                          -- enabled (true)
+    NOW(),                      -- created_at
+    NOW(),                      -- updated_at
+    NULL,                       -- user_id (auto increment)
+    'admin',                    -- username
+    'admin@gamil.com',          -- email
+    'Yixi',                     -- first_name
+    'Wan',                      -- last_name
+    'e55e2ee3-31d7-4f3c-9d83-f4c29a97425a'  -- keycloak_id
+);
