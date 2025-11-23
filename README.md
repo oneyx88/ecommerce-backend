@@ -91,6 +91,15 @@
 - Maven `3.9+`
 - Docker and Docker Compose
 
+## Required Environment Variables
+
+Before running the services, make sure you have created a `.env` file or configured environment variables with the following keys:
+
+```bash
+STRIPE_SECRET_KEY=<your_stripe_test_or_live_secret_key>
+STRIPE_WEBHOOK_SECRET=<your_stripe_webhook_secret>
+
+
 ## Local Quick Start (excluding Kubernetes)
 1) Start infrastructure (from repo root)
    - `docker compose up -d`
