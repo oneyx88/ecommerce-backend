@@ -168,16 +168,6 @@
 - Kafka connectivity errors?
   - Local uses `PLAINTEXT`; cloud/managed MSK requires IAM and proper credentials/dependencies.
 
-## Next Steps
-- Add Kubernetes deployment documentation (Deployment/Service/Ingress, ConfigMap/Secret, TLS, probes/HPA, etc.).
-- Add end-to-end demo content and sample datasets.
-
----
-
-## Contributing and Development
-- Keep code style consistent with the existing codebase.
-- Testing: use `spring-boot-starter-test` and `spring-security-test` for unit/integration; `spring-kafka-test` for messaging.
-- Issues: feel free to open an issue for architecture/implementation discussions.
 
 ## Associated Frontend Repository
 - GitHub: https://github.com/oneyx88/ecommerce-frontend
