@@ -258,11 +258,69 @@ public class ProductServiceImpl implements ProductService {
             limit = 10;
         }
 
-        List<Object> idObjs =
-                redisTemplate.opsForList().range(HOT_PRODUCTS_KEY, 0, limit - 1);
+        // 1. 尝试从 Redis 获取热点商品 ID 列表
+        List<Object> idObjs = redisTemplate.opsForList().range(HOT_PRODUCTS_KEY, 0, limit - 1);
+        List<Long> productIds = convertToProductIds(idObjs);
 
+        // 2. 如果缓存命中，直接处理并返回
+        if (!productIds.isEmpty()) {
+            return fetchProductDetails(productIds);
+        }
+
+        // 3. 缓存未命中，使用自旋锁防止缓存击穿
+        String lockKey = "lock:hot_products";
+        // 尝试获取锁，设置较短的过期时间防止死锁
+        Boolean isLocked = redisTemplate.opsForValue().setIfAbsent(lockKey, "LOCKED", Duration.ofSeconds(3));
+
+        if (Boolean.TRUE.equals(isLocked)) {
+            try {
+                // 4. 双重检查（Double Check）
+                idObjs = redisTemplate.opsForList().range(HOT_PRODUCTS_KEY, 0, limit - 1);
+                productIds = convertToProductIds(idObjs);
+                
+                if (!productIds.isEmpty()) {
+                    return fetchProductDetails(productIds);
+                }
+
+                // 5. 查询数据库（降级为最新商品）并重建缓存
+                // 注意：这里原本逻辑是 fallback 到 latest，现在我们将 fallback 结果写入 Redis 以便后续请求复用
+                Pageable pageable = PageRequest.of(0, limit, Sort.by("productId").descending());
+                List<Product> latest = productRepository.findAll(pageable).getContent();
+                productIds = latest.stream().map(Product::getProductId).toList();
+
+                if (!productIds.isEmpty()) {
+                    // 写入 Redis List
+                    // 先删除旧的（虽然理论上是空的，但为了保险）
+                    redisTemplate.delete(HOT_PRODUCTS_KEY);
+                    // 从右侧依次推入，保持顺序
+                    for (Long id : productIds) {
+                        redisTemplate.opsForList().rightPush(HOT_PRODUCTS_KEY, id);
+                    }
+                    // 设置过期时间
+                    redisTemplate.expire(HOT_PRODUCTS_KEY, productCacheTtl);
+                }
+                
+                return fetchProductDetails(productIds);
+
+            } finally {
+                // 6. 释放锁
+                redisTemplate.delete(lockKey);
+            }
+        } else {
+            // 7. 获取锁失败，自旋重试
+            try {
+                Thread.sleep(50); // 短暂休眠
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Interrupted while waiting for hot products lock", e);
+            }
+            // 递归调用重试
+            return getHotProducts(limit);
+        }
+    }
+
+    private List<Long> convertToProductIds(List<Object> idObjs) {
         List<Long> productIds = new ArrayList<>();
-
         if (idObjs != null) {
             for (Object obj : idObjs) {
                 if (obj instanceof Long l) {
@@ -277,24 +335,19 @@ public class ProductServiceImpl implements ProductService {
                 }
             }
         }
+        return productIds;
+    }
 
-        // 如果 Redis 里没有热点商品，降级为按最新商品取一页
-        if (productIds.isEmpty()) {
-            Pageable pageable = PageRequest.of(0, limit, Sort.by("productId").descending());
-            List<Product> latest = productRepository.findAll(pageable).getContent();
-            productIds = latest.stream().map(Product::getProductId).toList();
-        }
-
-        // 复用 getProductById（会走详情缓存）
+    private List<ProductResponse> fetchProductDetails(List<Long> productIds) {
         List<ProductResponse> hotProducts = new ArrayList<>();
         for (Long id : productIds) {
             try {
+                // 这里复用 getProductById，如果 getProductById 也有缓存逻辑，则进一步提升性能
                 hotProducts.add(getProductById(id));
             } catch (ResourceNotFoundException ex) {
                 log.warn("Hot product id {} not found, skip", id);
             }
         }
-
         return hotProducts;
     }
 
@@ -372,4 +425,3 @@ public class ProductServiceImpl implements ProductService {
 
 
 }
-
